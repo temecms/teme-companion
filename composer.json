@@ -1,0 +1,30 @@
+{
+    "name": "teme/teme-companion",
+    "description": "Read-only site report for moving a WordPress site to Teme.",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0-or-later",
+    "require": {
+        "php": ">=7.4"
+    },
+    "require-dev": {
+        "phpstan/extension-installer": "^1.4",
+        "phpstan/phpstan": "^2.2",
+        "phpunit/phpunit": "^13.3",
+        "szepeviktor/phpstan-wordpress": "^2.0"
+    },
+    "autoload": {
+        "psr-4": { "Teme\\Companion\\": "src/" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Teme\\Companion\\Tests\\": "tests/" }
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": { "phpstan/extension-installer": true }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "analyse": "phpstan analyse --memory-limit=1G",
+        "check": ["@analyse", "@test"]
+    }
+}

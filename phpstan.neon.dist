@@ -1,0 +1,39 @@
+parameters:
+    level: 5
+    phpVersion: 70400
+    paths:
+        - teme-companion.php
+        - uninstall.php
+        - src
+    treatPhpDocTypesAsCertain: false
+    # Environment reports the site's raw wp-config constants (their literal value, or null if
+    # unset). The suggested functions answer a different question: effective behaviour after
+    # filters, for one post or one operation. So this rule doesn't apply to a report.
+    ignoreErrors:
+        -
+            message: '#^Found usage of constant (DISALLOW_FILE_MODS|WP_POST_REVISIONS)\. Use .+ instead\.$#'
+            path: src/Collectors/Environment.php
+        # WP-CLI is optional and not installed as a composer dependency.
+        -
+            message: '#^Function WP_CLI\\Utils\\get_flag_value not found\.$#'
+            path: src/Cli/ReportCommand.php
+        -
+            message: '#^Call to static method (log|success)\(\) on an unknown class WP_CLI\.$#'
+            path: src/Cli/ReportCommand.php
+        -
+            message: '#^Call to static method add_command\(\) on an unknown class WP_CLI\.$#'
+            path: src/Plugin.php
+        # PHPStan analyses the shutdown closure as though it runs at the point it's declared, so it
+        # never sees $responded change before the closure's own `if` check. register_shutdown_function()
+        # actually defers the call until this method has returned (or died), by which point the
+        # reference-captured flag reflects what really happened.
+        -
+            message: '#^If condition is always false\.$#'
+            path: src/Admin/Page.php
+        # Rank Math is optional and not installed as a composer dependency, so PHPStan has no stub
+        # for \RankMath\Helper and treats any method_exists() check against it as impossible. The
+        # check is correct and safe at runtime: method_exists() on a string naming a class that
+        # isn't loaded simply returns false, which is exactly the point of guarding this call.
+        -
+            message: '#^Call to function method_exists\(\) with .\\\\RankMath\\\\Helper. and .replace_vars. will always evaluate to false\.$#'
+            path: src/Api/Endpoints/Content.php
