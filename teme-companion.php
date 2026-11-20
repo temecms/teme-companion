@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Teme Companion
  * Description:       A read-only site report plus a read-only export API for moving your site to Teme. The report stays local until you download it; the export API — administrators only, HTTPS only — is how Teme's importer reads your content, including the personal data it needs to migrate.
- * Version:           0.2.0
+ * Version:           0.3.0
  * Requires at least: 5.0
  * Requires PHP:      7.4
  * Author:            Teme
@@ -19,7 +19,7 @@ if (! defined('ABSPATH')) {
     exit;
 }
 
-define('TEME_COMPANION_VERSION', '0.2.0');
+define('TEME_COMPANION_VERSION', '0.3.0');
 define('TEME_COMPANION_FILE', __FILE__);
 
 spl_autoload_register(static function (string $class): void {

@@ -40,6 +40,7 @@ final class Routes
             'menus' => new Endpoints\Menus(),
             'redirects' => new Endpoints\Redirects(),
             'urls' => new Endpoints\Urls(),
+            'languages' => new Endpoints\Languages(),
         ];
 
         foreach ($guarded as $path => $endpoint) {
