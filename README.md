@@ -110,6 +110,7 @@ Teme Companion also provides a read-only JSON API at `/wp-json/teme/v1/` for mig
 | `GET content` | `after_id`, `limit`, `modified_after`, `types`, `statuses`, `include` | 50 / 200; **20** with `include=rendered` |
 | `GET comments` | `after_id`, `limit` | 500 / 1000 |
 | `GET menus` | — | — |
+| `GET languages` | — (Polylang's languages, settings and translated site title and tagline; `"active": false` without Polylang) | — |
 | `GET redirects` | `source`, `after_id`, `limit` | 500 / 1000 |
 | `GET urls` | `kind`, `after_id`, `limit` | 1000 / 2000 |
 
